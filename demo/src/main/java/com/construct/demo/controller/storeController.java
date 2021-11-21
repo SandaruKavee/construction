@@ -3,8 +3,12 @@ package com.construct.demo.controller;
 import java.util.*;
 
 import com.construct.demo.model.Store;
+import com.construct.demo.service.StoreService;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 //import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +22,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class storeController {
+
+    @Autowired
+    private StoreService storeService;
+
+    @Value("${app.name: Default Construction}")
+    private String appName;
+    @GetMapping("/app-name")
+    private String getName(){
+        return appName;
+    }
     //@RequestMapping(value="/name",method= RequestMethod.GET)
     @GetMapping(value="/name")
     private Map<String,String> getStoreName(){
@@ -28,7 +42,7 @@ public class storeController {
     }
 
     @GetMapping(value="/name/{id}")
-    private String getName(@RequestParam Long id){
+    private String getName(@PathVariable Long id){
         return id.toString();
     }
 
@@ -40,11 +54,15 @@ public class storeController {
         return map;
     }
     @PostMapping(value="/register")
-    private Map<String,String> register(@RequestBody Store store){
+    private Store register(@RequestBody Store store){
         HashMap<String,String> map= new HashMap<>();
      
         map.put("storeID",store.getStoreID());
-        return map;
+        return store;
+    }
+    @GetMapping(value="/stores")
+    private List<Store> getStores(){
+        return storeService.getStores();
     }
  
 

@@ -9,6 +9,7 @@ import lombok.ToString;
 public class Store {
     private String storeID;
     private String location;
+    private String capacity;
 
     // public Store(String storeID,String location ){
     //     this.storeID=storeID;
@@ -21,5 +22,8 @@ public class Store {
     }
     public String getLocation() {
         return location;
+    }
+    public String getCapacity(){
+        return capacity;
     }
 }
