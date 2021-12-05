@@ -1,4 +1,11 @@
 package com.construct.demo.model;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Column;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -6,10 +13,19 @@ import lombok.ToString;
 @Setter
 @Getter
 @ToString
+@Entity
+@Table(name="store")
 public class Store {
-    private String storeID;
-    private String location;
-    private String capacity;
+
+
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    @Column(name="store_id")
+    private Integer storeID;
+    @Column(name="store_location")
+    private String storeLocation;
+    @Column(name="store_capacity")
+    private String storeCapacity;
 
     // public Store(String storeID,String location ){
     //     this.storeID=storeID;
@@ -17,13 +33,13 @@ public class Store {
 
 
     // }
-    public String getStoreID() {
+    public Integer getStoreID() {
         return storeID;
     }
     public String getLocation() {
-        return location;
+        return storeLocation;
     }
     public String getCapacity(){
-        return capacity;
+        return storeCapacity;
     }
 }
